@@ -1,59 +1,81 @@
-# GabrielaPobedaTattooApp
+# Gabriela Pobeda Tattoo
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.2.
+MVP de aplicação web responsiva para organização de clientes e agendamentos de um estúdio de tatuagem, desenvolvido na disciplina Projeto de Software.
 
-## Development server
+## Objetivo
 
-To start a local development server, run:
+Facilitar o controle da agenda do estúdio, centralizando informações dos clientes, sessões, valores e sinais em uma interface simples.
+
+## Funcionalidades
+
+- Cadastro de agendamentos.
+- Registro do nome do cliente, data, horário e tatuagem planejada.
+- Controle do valor da sessão e do sinal pago.
+- Campo para observações.
+- Cancelamento e reativação de agendamentos.
+- Validação de campos obrigatórios e horários duplicados.
+- Persistência dos agendamentos no armazenamento local do navegador.
+
+## Tecnologias utilizadas
+
+- Angular
+- TypeScript
+- HTML
+- CSS
+- LocalStorage
+- Git e GitHub para versionamento do código.
+
+## Requisitos
+
+- Node.js e npm instalados.
+- Angular CLI compatível com a versão do projeto.
+
+## Como executar
+
+1. Clone o repositório:
+
+   ```bash
+   git clone https://github.com/FelipeTiciano/gabriela-pobeda-tattoo.git
+   ```
+
+2. Entre na pasta do projeto:
+
+   ```bash
+   cd gabriela-pobeda-tattoo
+   ```
+
+3. Instale as dependências:
+
+   ```bash
+   npm install
+   ```
+
+4. Inicie o servidor de desenvolvimento:
+
+   ```bash
+   npx ng serve
+   ```
+
+5. Acesse `http://localhost:4200/` no navegador.
+
+## Testes e compilação
+
+Para executar os testes configurados no projeto:
 
 ```bash
-ng serve
+npx ng test
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Para gerar a compilação:
 
 ```bash
-ng generate component component-name
+npx ng build
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Contexto do projeto
 
-```bash
-ng generate --help
-```
+A aplicação foi concebida como um MVP para apoiar a rotina administrativa de um estúdio de tatuagem, reduzindo a dependência de anotações manuais e facilitando o acompanhamento dos agendamentos.
 
-## Building
+## Autor
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Projeto acadêmico desenvolvido para a disciplina Projeto de Software.git add README.md

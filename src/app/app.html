@@ -1,0 +1,149 @@
+
+<div class="app-shell">
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-icon">GP</div>
+      <div>
+        <h1>Gabriela Pobeda</h1>
+        <span>TATTOO STUDIO · AGENDA</span>
+      </div>
+    </div>
+    <div class="profile">
+      <div class="avatar">G</div>
+      <span>Gabriela</span>
+    </div>
+  </header>
+
+  <main class="content">
+    <section class="welcome">
+      <div>
+        <p class="eyebrow">SEU ESPAÇO, SUA ROTINA</p>
+        <h2>Agenda</h2>
+        <p class="subtitle">Organize seus atendimentos com tranquilidade.</p>
+      </div>
+      <button class="primary-button" (click)="novoAgendamento()">
+        <span>＋</span> Novo agendamento
+      </button>
+    </section>
+
+    <section class="date-panel">
+      <div>
+        <span class="date-label">VISÃO DO DIA</span>
+        <h3>{{ dataAtual }}</h3>
+        <p>{{ agendamentos.length }} agendamento(s) registrado(s)</p>
+      </div>
+      <div class="date-mark">CALENDÁRIO <span>✳</span></div>
+    </section>
+
+    <section class="stats">
+      <article class="stat-card">
+        <span class="stat-icon">▦</span>
+        <p>Agendamentos ativos</p>
+        <strong>{{ totalAtivos }}</strong>
+      </article>
+      <article class="stat-card">
+        <span class="stat-icon">◷</span>
+        <p>Próximo horário</p>
+        <strong>{{ proximoHorario }}</strong>
+      </article>
+      <article class="stat-card">
+        <span class="stat-icon">R$</span>
+        <p>Total previsto do dia</p>
+        <strong>{{ totalPrevisto | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</strong>
+      </article>
+    </section>
+
+    <section class="appointments">
+      <div class="section-heading">
+        <div>
+          <h3>Atendimentos do dia</h3>
+          <p>Confira os detalhes de cada sessão.</p>
+        </div>
+        <span class="live-label"><span></span> Sua agenda</span>
+      </div>
+
+      <div class="appointment-list" *ngIf="agendamentos.length > 0; else agendaVazia">
+        <article class="appointment" *ngFor="let item of agendamentos">
+          <div class="appointment-time">
+            <strong>{{ item.horario }}</strong>
+            <span>HORÁRIO</span>
+          </div>
+          <div class="appointment-info">
+            <h4>{{ item.cliente }}</h4>
+            <p>{{ item.tatuagem }}</p>
+            <span class="value">{{ item.valor | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</span>
+          </div>
+          <div class="appointment-actions">
+            <span class="status" [class.cancelled]="item.status === 'Cancelado'">
+              {{ item.status }}
+            </span>
+            <button class="text-button" (click)="alternarStatus(item.id)">
+              {{ item.status === 'Ativo' ? 'Cancelar' : 'Reativar' }}
+            </button>
+          </div>
+        </article>
+      </div>
+
+      <ng-template #agendaVazia>
+        <div class="empty-state">
+          <span>✳</span>
+          <h4>Nenhum atendimento por aqui</h4>
+          <p>Adicione um agendamento para começar a organizar seu dia.</p>
+          <button class="secondary-button" (click)="novoAgendamento()">
+            Criar agendamento
+          </button>
+        </div>
+      </ng-template>
+    </section>
+
+    <section class="form-panel" *ngIf="mostrarFormulario">
+      <div class="section-heading">
+        <div>
+          <h3>Novo agendamento</h3>
+          <p>Preencha os dados do atendimento.</p>
+        </div>
+        <button class="close-button" (click)="mostrarFormulario = false" aria-label="Fechar formulário">×</button>
+      </div>
+
+      <form (ngSubmit)="salvarAgendamento()">
+        <div class="form-grid">
+          <label>
+            Nome da cliente
+            <input name="cliente" [(ngModel)]="form.cliente" required placeholder="Ex.: Marina Souza">
+          </label>
+          <label>
+            Data
+            <input name="data" type="date" [(ngModel)]="form.data" required>
+          </label>
+          <label>
+            Horário
+            <input name="horario" type="time" [(ngModel)]="form.horario" required>
+          </label>
+          <label>
+            Valor da sessão (R$)
+            <input name="valor" type="number" min="0" step="0.01" [(ngModel)]="form.valor" required placeholder="350,00">
+          </label>
+          <label>
+            Sinal pago (R$)
+            <input name="sinal" type="number" min="0" step="0.01" [(ngModel)]="form.sinal" required>
+          </label>
+          <label>
+            Tatuagem / procedimento
+            <input name="tatuagem" [(ngModel)]="form.tatuagem" required placeholder="Ex.: Lua e flores">
+          </label>
+          <label class="full-width">
+            Observações
+            <textarea name="observacoes" [(ngModel)]="form.observacoes" rows="3" placeholder="Referências, detalhes e lembretes"></textarea>
+          </label>
+        </div>
+        <p class="form-error" *ngIf="erroFormulario">{{ erroFormulario }}</p>
+        <div class="form-buttons">
+          <button type="button" class="secondary-button" (click)="mostrarFormulario = false">Voltar</button>
+          <button type="submit" class="primary-button">Salvar agendamento</button>
+        </div>
+      </form>
+    </section>
+
+    <footer>Gabriela Pobeda Tattoo <span>·</span> Organização feita com cuidado.</footer>
+  </main>
+</div>
